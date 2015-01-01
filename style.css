@@ -1,0 +1,138 @@
+html {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	font-family: 'Arimo', sans-serif;
+	margin: 0;
+	font-size: 133%;
+	height: 100%;
+}
+
+.navigation {
+	list-style: none;
+	position: relative;
+	height: auto;
+	text-align: center;
+	padding-top: 1.5%;
+	padding-bottom: 1.5%;
+	margin: 0;
+	position: fixed;
+	width: 100%;
+	background-color: #3d3d3d;
+	z-index: 2;
+}
+
+	.navigation li {
+		position: relative;
+		display: inline;
+		margin-right: 20px;
+	}
+	
+	.navigation a {
+		color: white;
+		text-decoration: none;
+	}
+	
+		.navigation a:hover {
+			color: #f78800;
+		}
+
+.middle {
+	background-image: url("pencils.JPG");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100%;
+	z-index: -1;
+}
+
+h1 {
+	font-size: 300.8%;
+	text-align: center;
+	color: white;
+	text-shadow: 0px 0px 25px #3d3d3d;
+	margin: 0;
+	font-weight: normal;
+	position: fixed;
+	top: 50%;
+    transform: translateY(-50%);
+	text-align: center;
+	margin-left: 18.85%;
+	margin-right: 18.85%;
+}
+
+.title {
+	z-index: -1;
+}
+
+.text {
+	padding-left: 18.85%;
+	padding-right: 18.85%;
+	line-height: 155%;
+	text-align: justify;
+	margin: 0;
+	position: relative;
+	z-index: 1;
+}
+
+.full {
+	height: 100%;
+}
+
+.white {
+	background-color: white;
+	color: black;
+}
+
+.black {
+	background-color: #3d3d3d;
+	color: #f78800;
+}
+
+.divider {
+	position: relative;
+	z-index: 1;
+	height: 3px;
+	background-color: #f78800;
+	margin-left: 9.45%;
+	margin-right: 9.45%;
+}
+
+.words {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+h2 {
+	font-size: 167%;
+	font-weight: normal;
+	margin: 0;
+}
+
+.social-media {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+	.social-media ul {
+		margin-left: 0;
+		padding-left: 0;
+		padding-right: 2%;
+	}
+	
+	.social-media li {
+		display: inline;
+		margin-left: 0;
+		padding-left: 0;
+		padding-right: 2%;
+	}
+	
+	.social-media a {
+		text-decoration: none;
+		color: #f78800;
+	}
