@@ -51,17 +51,15 @@ body {
 
 h1 {
 	font-size: 300.8%;
-	text-align: center;
 	color: white;
 	text-shadow: 0px 0px 25px #3d3d3d;
-	margin: 0;
 	font-weight: normal;
 	position: fixed;
+	margin: 0;
 	top: 50%;
-    transform: translateY(-50%);
+	left: 50%;
+	transform: translate(-50%, -50%);
 	text-align: center;
-	margin-left: 18.85%;
-	margin-right: 18.85%;
 }
 
 .title {
