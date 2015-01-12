@@ -21,7 +21,9 @@ body {
 	position: fixed;
 	width: 100%;
 	background-color: #3d3d3d;
-	z-index: 2;
+	-ms-transform: translateZ(100%);
+	-webkit-transform: translateZ(100%);
+	transform: translateZ(100%);
 	margin-left: -1.25%;
 }
 
@@ -47,7 +49,9 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	height: 100%;
-	z-index: -1;
+	-ms-transform: translateZ(-50%);
+	-webkit-transform: translateZ(-50%);
+	transform: translateZ(-50%);
 }
 
 h1 {
@@ -65,10 +69,6 @@ h1 {
 	text-align: center;
 }
 
-.title {
-	z-index: -1;
-}
-
 .text {
 	padding-left: 18.85%;
 	padding-right: 18.85%;
@@ -76,7 +76,9 @@ h1 {
 	text-align: justify;
 	margin: 0;
 	position: relative;
-	z-index: 1;
+	-ms-transform: translateZ(25%);
+	-webkit-transform: translateZ(25%);
+	transform: translateZ(25%);
 }
 
 .full {
@@ -95,7 +97,9 @@ h1 {
 
 .divider {
 	position: relative;
-	z-index: 1;
+	-ms-transform: translateZ(25%);
+	-webkit-transform: translateZ(25%);
+	transform: translateZ(25%);
 	height: 3px;
 	background-color: #f78800;
 	margin-left: 9.45%;
