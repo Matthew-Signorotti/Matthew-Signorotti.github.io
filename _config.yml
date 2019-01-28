@@ -1,8 +1,8 @@
 title: Stack Problems
 description: My Personal Stack Problems
-author: Agus Makmun
-github: https://github.com/agusmakmun
-about: I am freelance developer. Currently doing more in backend, focused in Python and Django.
+author: Matthew Signorotti
+github: https://github.com/Matthew-Signorotti
+about: I am a UC Berkeley student pursuing a double major in Electrical Engineering and Computer Sciences (EECS) and Industrial Engineering and Operations Research (IEOR).
 disqus_shortname: stackproblems
 google_analytics: UA-XXXXXXXX-Y
 avatar_url: /static/img/avatar.jpg
@@ -16,28 +16,28 @@ collections:
     permalink: /project/:path/
 
 social:
-    - icon: fa-facebook
-      link: "#"
-    - icon: fa-twitter
-      link: "https://twitter.com/agusmakmun6"
+    #- icon: fa-facebook
+    #  link: "#"
+    #- icon: fa-twitter
+    #  link: "https://twitter.com/agusmakmun6"
     - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/summonagus"
-    - icon: fa-stack-exchange
-      link: "#"
+      link: "https://www.linkedin.com/in/matthew-signorotti/"
+    #- icon: fa-stack-exchange
+    #  link: "#"
     - icon: fa-github
-      link: "https://github.com/agusmakmun"
+      link: "https://github.com/Matthew-Signorotti"
 
 share:
-  twitter_username: agusmakmun6
-  fb_appid: 1749788565247320
+  #twitter_username: agusmakmun6
+  #fb_appid: 1749788565247320
 
 urls:
     - text: About Me
       url: /about/
-    - text: My Projects
-      url: /projects/
-    - text: XML Feed
-      url: /feed.xml
+    #- text: My Projects
+    #  url: /projects/
+    #- text: XML Feed
+    #  url: /feed.xml
 
 url: "https://agusmakmun.github.io"
 baseurl: ""
