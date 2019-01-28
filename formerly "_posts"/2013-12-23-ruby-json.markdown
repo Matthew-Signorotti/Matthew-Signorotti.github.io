@@ -1,7 +1,6 @@
 ---
 layout: post
-title:  "Math 54"
-pdf_url: "Math_54_Course_Summary.pdf"
+title:  "Parsing JSON with Ruby"
 date:   2013-12-23 00:18:23 +0700
 categories: [ruby]
 ---
