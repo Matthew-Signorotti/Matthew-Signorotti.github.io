@@ -4,6 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I am freelance developer. Currently doing more in backend, focused in Python and Django.
+I am a UC Berkeley student pursuing a double major in Electrical Engineering and Computer Sciences (EECS) and Industrial Engineering and Operations Research (IEOR).
 
-email: agus[at]python.web.id
+email: matthew.signorotti[at]gmail.com
