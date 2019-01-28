@@ -9,7 +9,7 @@ layout: default
   <p>Following are some notes from my studies at UC Berkeley, in pdf format.</p>
   <ol class="posts">
     {% for post in paginator.posts %}
-      <li><a href="{{ post.pdf_url }}">{{ post.title }}</a> &raquo; <i><span>{{ post.date | date_to_string }}</span></i></li>
+      <li><a href="{{ post.pdf_url }}">{{ post.title }}</a> &raquo; <i><span>{{ post.semester }}</span></i></li>
     {% endfor %}
   </ol>
 
