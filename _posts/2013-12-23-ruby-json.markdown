@@ -4,5 +4,5 @@ title:  "Math 54: Linear Algebra and Differential Equations"
 pdf_url: "Math_54_Course_Summary.pdf"
 date:   2013-12-23 00:18:23 +0700
 semester: "summer 2018"
-categories: [ruby]
+categories: [mathematics]
 ---
