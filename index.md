@@ -3,8 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
-is_index: true
-site_title: Welcome! | Matthew Signorotti
+heading: Matthew Signorotti
+tab_title: Welcome!
 ---
 
 # My course notes
