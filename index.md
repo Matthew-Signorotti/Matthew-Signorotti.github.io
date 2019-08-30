@@ -9,7 +9,7 @@ tab_title: Welcome!
 
 # My course notes
 
-[Math 54 (linear algebra)](course_notes/math_54.pdf)
+[Math 54 (linear algebra)](course_notes/Math_54.pdf)
 : My most extensive notes. Prerequisite: familiarity with algebra.
 
 [CS 70 (discrete mathematics)](course_notes/cs_70.pdf)
