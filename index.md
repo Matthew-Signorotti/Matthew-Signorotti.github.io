@@ -9,14 +9,12 @@ tab_title: Welcome!
 
 # My course notes
 
-For some classes I have taken at UC Berkeley, I have typed (sometimes extensive) notes documents. Please enjoy perusing my work — hopefully you will find some of it educational!
+[Math 54 (linear algebra)](course_notes/math_54.pdf)
+: My most extensive notes. Prerequisite: familiarity with algebra.
 
-| Class | Topic | Comment |
-|:------|:------|:--------|
-| [Math 54](course_notes/Math_54.pdf) | Linear algebra | These notes are my most extensive. |
+[CS 70 (discrete mathematics)](course_notes/cs_70.pdf)
+: Prerequisite: familiarity with algebra.
 
 # Contact me
 
-To send me a message, anonymous or not, please fill out [this form](https://goo.gl/forms/afUMuUm4UXOzIjGu1). I welcome messages on all topics, including feedback of any sort!
-
-You can also [connect with me on LinkedIn](https://www.linkedin.com/in/matthew-signorotti/) or view my [GitHub profile](https://github.com/Matthew-Signorotti).
+Please, [connect with me on LinkedIn](https://www.linkedin.com/in/matthew-signorotti/)! You can also view my technical projects on [my GitHub profile](https://github.com/Matthew-Signorotti).
