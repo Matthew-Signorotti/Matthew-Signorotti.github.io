@@ -1,0 +1,49 @@
+html {
+  max-width: 30em;
+  margin: auto;
+}
+
+h1 {
+  font-weight: normal;
+  text-align: center;
+}
+
+#portrait {
+  text-align: center;
+}
+
+#notecards-container {
+  position: relative;
+}
+
+#notecards {
+  margin-left: 5em; /* Will be changed when prereq arrows are rendered */
+  background: white;
+  position: absolute;
+}
+
+.notes {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 0.5em;
+  z-index: 1;
+}
+
+.notes .subject {
+  font-size: 1.1em;
+}
+
+.notes .class {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+svg {
+  position: absolute;
+}
+
+svg rect {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 1;
+}

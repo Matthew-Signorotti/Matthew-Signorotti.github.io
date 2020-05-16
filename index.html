@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matthew Signorotti</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="renderPrereqs.js"></script>
+  </head>
+
+  <body onload="renderArcs()">
+    <h1>Matthew Signorotti</h1>
+
+    <div id="portrait">
+      <img src="LinkedIn_photo.jpg" width="100">
+    </div>
+
+    <p>
+      Hi, my name is Matthew! I am an undergraduate at the University of California, Berkeley, where I study Electrical Engineering and Computer Sciences and Industrial Engineering and Operations Research. Welcome to my personal webpage.
+    </p>
+
+    <h2>My notes</h2>
+
+    <p>
+      Following are some notes that I have written.
+    </p>
+
+    <p>
+      <i>Arcs between two subjects indicate that knowing the upper subject helps to understand the lower subject.</i>
+    </p>
+
+    <div id="notecards-container">
+      <svg width="100%">
+        <rect from="settheory" to="probability" rx="10" ry="10" width="150" />
+        <rect from="settheory" to="linalg" rx="10" ry="10" width="150" />
+        <rect from="settheory" to="discretemath" rx="10" ry="10" width="150" />
+        <rect from="settheory" to="algorithms" rx="10" ry="10" width="150" />
+        <rect from="probability" to="ai" rx="10" ry="10" width="150" />
+        <rect from="discretemath" to="algorithms" rx="10" ry="10" width="150" />
+        <rect from="algorithms" to="ai" rx="10" ry="10" width="150" />
+      </svg>
+
+      <div id="notecards">
+        <p>
+          <div class="notes" id="settheory">
+            <span class="subject">Logic and set theory</span>
+          </div>
+        </p>
+        <p>
+          <div class="notes" id="probability">
+            <span class="subject">Probability theory</span>
+          </div>
+        </p>
+        <p>
+          <div class="notes" id="linalg">
+            <span class="subject">Linear algebra</span>
+            <br>
+            <span class="class">Math 54</span>
+          </div>
+        </p>
+        <p>
+          <div class="notes" id="discretemath">
+            <span class="subject">Discrete mathematics</span>
+            <br>
+            <span class="class">CS 70</span>
+          </div>
+        </p>
+        <p>
+          <div class="notes" id="algorithms">
+            <span class="subject">Algorithms</span>
+            <br>
+            <span class="class">CS 170</span>
+          </div>
+        </p>
+        <p>
+          <div class="notes" id="ai">
+            <span class="subject">Artificial intelligence</span>
+            <br>
+            <span class="class">CS 188</span>
+          </div>
+        </p>
+      </div>
+    </div>
+
+    <p>
+      <small>This webpage was served with GitHub Pages.</small>
+    </p>
+  </body>
+</html>
