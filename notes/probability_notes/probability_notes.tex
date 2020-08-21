@@ -1,0 +1,158 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stix}
+\usepackage{hyperref}
+
+\title{Probability notes}
+\author{Matthew Signorotti}
+\date{Fall 2019}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Sets and events}
+
+Most of this section, except for a brief excursion into formal axioms, is concerned with naive (intuitive) set theory, which appeals best to intuition rather than formal rigor. To start off, a \textbf{set} is a collection of abstract mathematical objects. \textbf{Subsets} $A, B, \ldots$ of some greater set $\Omega$ are also sets, but all of whose elements are contained in $\Omega$. Note that the symbol $\Omega$ is often assumed, without specification otherwise, to be this ``overarching'' set over which subsets are taken. Moreover, the \textbf{empty set} contains no elements and is denoted $\emptyset$.
+
+\subsection{Functions and indicator functions}
+
+\textbf{Functions} are rules ``mapping'' from a set $X$ to another (possibly identical) set $Y$. Give me some element of an input set, and a function relates some output element, deterministically, to this input. \textbf{Indicator functions} are functions from $\Omega$ to the binary integers $\mathbb B = \{ 0, 1 \}$.
+
+\subsection{Set operations and axioms}
+
+\subsubsection{Set operations}
+
+\begin{itemize}
+\item The \textbf{complement} $A^c$ of a subset $A$ of $\Omega$, with respect to $\Omega$, is all elements $\omega \in \Omega$ such that $\omega \notin A$. (In math notation, this is $\{ \omega : \omega \in \Omega, \omega \notin A \}$. The $\{ \}$ indicates a set definition.)
+\item The \textbf{intersection} $AB = A \cap B$\footnote{The symbol $=$ means equality: for the case of sets, that they contain the same elements. When you write an equality, be careful to correctly communicate for what values an equality holds and how the operations on either side of the equality are defined. In this case, I am just noting two different ways of writing the same thing.} of two sets $A$ and $B$ is all elements in both $A$ and $B$ ($\{ \omega : \omega \in A, \omega \in B \}$). This definition extends naturally to longer or even arbitrarily long (infinite) sequences of sets.
+\item The \textbf{union} $A \cup B$ of two sets $A$ and $B$ is all elements in \emph{either} $A$ \emph{or} $B$ ($\{ \omega : \omega \in A \text{ or } \omega \in B \}$). Again, this definition extends as expected to longer or infinite sequences of sets.
+\item The \textbf{set difference} $A \setminus B$ with respect to an overall set $\Omega$ is defined as
+\[ A \setminus B = AB^c. \]
+\item The \textbf{symmetric difference} $A \triangle B$ of $A$ and $B$ with respect to $\Omega$ is
+\[ A \triangle B = (A \setminus B) \cup (B \setminus A). \]
+\end{itemize}
+
+% There are perhaps too many to list, but here is a taste: Intersection (and union) of two sets is a commutative operation ($A \cap B = B \cap A$). The complement of $\Omega$ with respect to itself is $\emptyset$ ($\Omega^c = \emptyset$). According to \textbf{de Morgan's laws} for sets,
+% \[ (A_1 \cup A_2 \cup \cdots)^c =  A_1^c \cap A_2^c \cap \cdots, \]
+% and likewise
+% \[ (A_1 \cap A_2 \cap \cdots)^c = A_1^c \cup A_2^c \cup \cdots. \]
+
+\subsubsection{Infinity and assumptions}
+
+The above definitions of intersection and union of two sets are noted to extend ``nicely'' for intersection and union of numerous or infinitely many sets. This assumption is fundamental to set and probability theory, but it is questionable. Infinite union gives us one example: suppose somebody can enumerate an arbitrary number of random subsets of the natural numbers. Indeed, it may be impractical for this arbitrary sequence of subsets to compute its infinite union, especially since there is no rhyme or reason to the contents of these subsets. Yet we still write mathematical notation for elements which \emph{never} appear in any of these infinitely many subsets, as if we had a means of discovering all such elements.\footnote{This logic resembles the sometimes criticized law of the excluded middle, according to which all propositions are either true or false. Can we really assume that everything is either in one set or in its complement, when we lack the perhaps infinite resources required to check such a notion?} This discussion suggests that questioning fundamental assumptions or axioms will only land you in muddy territory. % Consequently, even if there is no true objective truth, we attempt to circumvent the lack of a rock-solid foundation by establishing simple assumptions or ``axioms'' upon which mathematical theories can be built. % Consequently, in set theory, and other fields like real analysis, we use the idea of infinity without worry.
+
+\subsection{Limits of sets}
+
+Consider a sequence of subsets $\{ A_k : k = 1, 2, 3, \ldots \}$. Mirroring the approach of calculus or real analysis, we define a notion of limits or ``approaching a value'' to these subsets in the following way:
+\begin{gather*}
+\inf_{k \geq n} A_k := \bigcap_{k = n}^\infty A_k \\
+\sup_{k \geq n} A_k := \bigcup_{k = n}^\infty A_k \\
+\liminf_{n \to \infty} A_n = \bigcup_{n = 1}^\infty \bigcap_{k = n}^\infty A_k \\
+\limsup_{n \to \infty} A_n = \bigcap_{n = 1}^\infty \bigcup_{k = n}^\infty A_k
+\end{gather*}
+Intuitively, $\liminf$ is the set of elements, each of which has some natural number index $n$ for which \emph{all} the subsets $A_n, A_{n + 1}, \ldots$ contain that element. $\limsup$ is the set of all elements which, for any and all indices $n$, exist in some subset $A_k$ with index $k \geq n$. Note two properties:
+\begin{enumerate}
+\item $\liminf$ is a stronger idea, in that $\liminf_{n \to \infty} A_n \subset \limsup_{n \to \infty} A_n$.\footnote{$\subset$ is a similar operation to $=$, in that they both relate two sets. Writing $A \subset B$ means that every element in $A$ is also in $B$, i.e. $B$ contains $A$ and possibly more elements.}
+\item By de Morgan's laws, $(\liminf_{n \to \infty} A_n)^c = \limsup_{n \to \infty} A_n^c$.
+\end{enumerate}
+
+Finally, we define the \textbf{limit} $\lim_{n \to \infty} A_n$ as equal to $\liminf_{n \to \infty} A_n$, or $\limsup_{n \to \infty} A_n$, if
+\[ \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n; \]
+otherwise, the limit does not exist. Intuitively, the limit is the set of elements which keep popping up forever as you infinitely iterate through and examine the sequence $\{ A_n \}$, if these elements all eventually start popping up in every single consecutive subset. For a counterexample, the following periodic sequence of subsets has no limit:
+\[ \{ 0, 1, 2 \}, \{ 0, 1 \}, \{ 0, 1, 2 \}, \{ 0, 1 \}, \ldots \]
+
+By a somewhat involved proof, one can argue that each of the following seemingly intuitive results is implied by our definitions.
+\begin{align*}
+\lim_{n \to \infty} \left( \inf_{k \geq n} A_k \right) &= \liminf_{n \to \infty} A_n \\
+\lim_{n \to \infty} \left( \sup_{k \geq n} A_k \right) &= \limsup_{n \to \infty} A_n
+\end{align*}
+
+\subsection{Monotone sequences}
+
+A sequence of sets $\{ A_n \}$ is \textbf{monotone non-decreasing}, or $A_n \nearrow$, if $A_1 \subset A_2 \subset \cdots$. A sequence is \textbf{monotone non-increasing}, or $A_n \searrow$, if $A_1 \supset A_2 \supset \cdots$.\footnote{$A \supset B$ when $B \subset A$.}
+
+The following two facts hold for monotone sequences of sets. The proof of the first shows that $\limsup_{n \to \infty} A_n \subset \liminf_{n \to \infty} A_n \subset  \limsup_{n \to \infty} A_n$; similar logic is used for the second.
+\begin{enumerate}
+\item If $\{ A_n \}$ is monotone and $A_n \nearrow$, then $\lim_{n \to \infty} A_n = \cup_{n = 1}^\infty A_n$.
+\item If $\{ A_n \}$ is monotone and $A_n \searrow$, then $\lim_{n \to \infty} A_n = \cap_{n = 1}^\infty A_n$.
+\end{enumerate}
+It can be shown from these findings that, in generality,
+\[ \liminf_{n \to \infty} B_n = \lim_{n \to \infty} \left( \inf_{k \geq n} B_k \right) \]
+and
+\[ \limsup_{n \to \infty} B_n = \lim_{n \to \infty} \left( \sup_{k \geq n} B_k \right). \]
+
+\subsection{Closure}
+
+A set $\mathcal C$ of subsets is said to be \textbf{closed} under a set operation if performing that operation on any subset in $\mathcal C$ returns another subset in $\mathcal C$. This concept will be used in our conventionally accepted formal definition of a probability space. The intersection of closed sets $\mathcal C_t$ is also closed, but not necessarily the union!
+
+A \textbf{field}, or \textbf{algebra} in the context of set theory, is a non-empty set of subsets which is closed under finite union, finite intersection, and complements. A \textbf{$\sigma$-field} or \textbf{$\sigma$-algebra} is the same idea, only stronger: it is also closed under \emph{infinite} union and intersection. A minimal set of conditions for $\mathcal A$ to be a field ($\sigma$-field) is that $\Omega \in \mathcal A$, $\mathcal A$ is closed under complements, and $\mathcal A$ is closed under finite (infinite) union. (If these conditions are satisfied, de Morgan's laws will then imply that $\mathcal A$ is closed under finite (infinite) intersection.) The intersections of fields and $\sigma$-fields are closed.
+
+\subsection{A $\sigma$-field generated by $\mathcal C$}
+
+$\sigma(\mathcal C)$ is defined as the \textbf{minimal $\sigma$-field} over $\mathcal C$: a $\sigma$-field containing $\mathcal C$ and which is also a subset of any other $\sigma$-field containing $\mathcal C$. For a set $\mathcal C$ of subsets of $\Omega$, some abstract math can show that the \emph{intersection} of all $\sigma$-fields $\mathcal B$ containing $\mathcal C$ is $\sigma(\mathcal C)$. Naturally, this conclusion is quite abstract; in the words of Sidney Resnick, ``explicit construction [of such a $\sigma$-algebra] is usually hopeless.''
+
+\subsection{Borel sets on the real line}
+
+The \textbf{Borel subsets} of the real numbers are the minimal $\sigma$-field containing $\mathcal C$, or $\sigma(\mathcal C)$, with
+\[ \mathcal C = \{ (a, b], -\infty \leq a \leq b < \infty \}. \]
+According to some tedious proofs, we can equivalently use open or closed endpoints for either the left or the right bounds above ($a$ or $b$), as long as the corresponding (left or right) $\infty$ term is the opposite: e.g., $\leq$ for $($ and $<$ for $[$. Any such way, we'll be dealing with the same $\sigma$-algebra.
+
+Suppose that $\Omega_0 \subset \Omega$. If $\mathcal B$ is a $\sigma$-field over $\Omega$, then $\mathcal B$, the $\sigma$-field containing nothing but the intersection of any element in $\mathcal B$ and $\Omega_0$, is a $\sigma$-field over $\Omega_0$. Furthermore, consider $\mathcal C$ as a set of subsets of $\Omega$, and $\mathcal B = \sigma(\mathcal C)$. Defining $\mathcal C_0$ by ``intersecting'' (roughly speaking) $\mathcal C$ with $\Omega_0$, one can prove that $\sigma(\mathcal C_0)$ is also equivalent to $\sigma(\mathcal C)$ ``intersected'' with $\Omega_0$. The proofs of these facts are somewhat involved.
+
+\section{Probability spaces}
+
+\subsection{Definitions and properties}
+
+A \textbf{probability space} is a triple $(\Omega, \mathcal B, P)$, for which
+\begin{itemize}
+\item $\Omega$ is a set containing exactly the presumed possible outcomes of some experiment.
+\item $\mathcal B$ is a $\sigma$-algebra of subsets of $\Omega$. These subsets are called \textbf{events}.
+\item $P$ is a \textbf{probability measure}: a function with domain $\mathcal B$ and range $[0, 1]$, such that
+\begin{enumerate}
+\item $P(A) \geq 0$ for all events $A \in \mathcal B$.
+\item $P$ is $\sigma$-additive: If $\{ A_n \}$ is a set of \emph{disjoint}\footnote{Disjoint: sharing no element.} events, then
+\[ P\left( \bigcup_{n = 1}^\infty A_n \right) = \sum_{n = 1}^\infty P(A_n). \]
+Because the infinite union must yield a valid event in $\mathcal B$ and $P$ is defined over $\mathcal B$, the infinite sum must converge to the same value.
+\item $P(\Omega) = 1$.
+\end{enumerate}
+\end{itemize}
+This definition has various implications.
+\begin{enumerate}
+\item Since $A \cup A^c = \Omega$ and $A$ and $A^c$ are disjoint, so $1 = P(\Omega) = P(A \cup A^c) = P(A) + P(A^c)$. Note that I have just used the axiom of substitution, which allows us to freely interchange $\Omega$ and $A \cup A^c$, which are the same set, and write expressions like $P(\Omega) = P(A \cup A^c)$.
+\item From property $1$, we have $P(\emptyset) = 0$.
+\item $P(A \cup B) = P(A) + P(B) - P(AB)$, by noting $A \cup B = AB^c \cup B$ and $A = AB \cup AB^c$ and using the $\sigma$-additive property of $P$.
+\item The \textbf{inclusion-exclusion} formula, provable by induction, generalizes the previous point:
+\begin{multline*}
+P\left( \bigcup_{j = 1}^n A_j \right) = \sum_{j = 1}^n P(A_j) - \sum_{1 \leq i < j \leq n} P(A_i A_j) + \sum_{1 \leq i < j < k \leq n} P(A_i A_j A_k) \\
+- \cdots + (-1)^{n + 1} P(A_1 A_2 \cdots A_n)
+\end{multline*}
+\item The \textbf{monotonicity property}: If $A \subset B$, then $P(A) \leq P(B)$ since $P(B) = P(A) + P(B \setminus A)$.
+\item \textbf{Subadditivity}: By reconsidering $\cup_{n = 1}^\infty A_n$ as the union of $A_1, A_1^c A_2, A_1^c A_2^c A_3, \ldots$, one can obtain through $\sigma$-additivity and monotonicity that
+\[ P\left( \bigcup_{n = 1}^\infty A_n \right) \leq \sum_{n = 1}^\infty P(A_n). \]
+\item \textbf{Continuity}: If $A_n \nearrow A$ ($A_1 \subset A_2 \subset \cdots$ and $A$ is the limit), then $P(A_n) \nearrow P(A)$, in that the sequence whose $n$th element is $P(A_n)$ is non-decreasing and has limit $P(A)$. Likewise, if $A_n \searrow A$, then $P(A_n) \searrow P(A)$ (the same definition, but $P(A_n)$ is non-increasing). The proof is by construction of disjoint sets $B_1 = A_1$ and $B_i = A_i \setminus A_{i - 1}$ for $i > 1$.
+\item The \textbf{Fatou lemma} combines these previous properties to observe that for $A_n \in \mathcal B, n \geq 1$,
+\[ P(\liminf_{n \to \infty} A_n) \leq \liminf_{n \to \infty} P(A_n) \leq \limsup_{n \to \infty} P(A_n) \leq P(\limsup_{n \to \infty} A_n). \]
+(Above, $\liminf_{n \to \infty} P(A_n)$ is defined as $\lim_{n \to \infty} \inf_{k \geq n} P(A_n)$, and likewise for $\limsup_{n \to \infty} P(A_n)$. Notably, we assume that these limits exist, although finding them may be hopelessly difficult.)
+
+An implication is that if $\lim_{n \to \infty} A_n = A$, or in less formal notation, $A_n \to A$, then $\lim_{n \to \infty} P(A_n) = P(A)$, i.e. $P(A_n) \to P(A)$.
+\end{enumerate}
+
+\subsubsection*{Distribution functions}
+
+If $\Omega = \mathbb R$, $\mathcal B$ is a $\sigma$-algebra containing $(-\infty, x]$ for all $x \in \mathbb R$, and $P$ is a probability measure over $\mathcal B$, then a \textbf{(probability) distribution function} is $F : \mathbb R \to [0, 1]$, defined so that $F(x) = P((-\infty, x])$ for any $x \in \mathbb R$. Under these assumptions,
+\begin{enumerate}
+\item $F$ is right continuous, in that for all $x \in \mathbb R$ $\lim_{y \to x^+} F(y) = F(x)$,
+\item $F$ is monotone non-decreasing, and
+\item $F$ has limits of $1$ at $\infty$ and $0$ at $-\infty$.
+\end{enumerate}
+In practice, we often know $F$ and want to go the other direction to obtain $P$; more on this later.
+
+\subsection{More on closure}
+
+
+
+\end{document}
