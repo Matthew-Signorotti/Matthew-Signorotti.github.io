@@ -8,6 +8,7 @@
 \usepackage{footnote}
 \makesavenoteenv{tabular}
 \usepackage{graphicx}
+\graphicspath{ { images/ } }
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 
@@ -399,7 +400,7 @@ In \textbf{likelihood weighting}, we start by actually setting all evidence vari
 
 \textbf{D-separation} is an algorithm which allows us to conclude complex conditional independence relationships. First, we graphically define the canonical forms of active and inactive triples as follows:
 \begin{center}
-\includegraphics[width=.8\textwidth]{triple_graphs}
+\includegraphics[width=.8\textwidth]{images/triple_graphs}
 \end{center}
 Above, shaded vertices are those variables which have known values, i.e. are being conditioned on.
 

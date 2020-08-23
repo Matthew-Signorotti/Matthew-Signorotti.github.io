@@ -1,5 +1,5 @@
 .DS_Store
-notes/*/*
+notes/*/*.*
 !notes/*/*.pdf
 !notes/*/*.tex
 
