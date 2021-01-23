@@ -1,20 +1,24 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{stix}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{mathrsfs}
 \usepackage{mathtools}
 
 \title{Set theory notes}
 \author{Matthew Signorotti}
-\date{Fall 2019}
+\date{Fall 2019--Spring 2021}
 
 \begin{document}
 \maketitle
 
 \tableofcontents
+
+\begin{abstract}
+These notes closely follow Herbert Enderton's \textit{Elements of Set Theory}. They are to serve as a summary of his book through Chapter $7$, the portion of the book which he describes as ``set theory that everyone with an interest in matters mathematical should know.''
+\end{abstract}
 
 \section{Axioms and operations}
 
@@ -22,20 +26,20 @@
 
 Our axiomatic system of set theory consists of two ``primitive notions'': \textbf{sets} and \textbf{members} of sets. We only restrict their meaning in the following ways: members are in ($\in$) sets, only another set can be a member of a set, and certain basic, rigorous assumptions (\textbf{axioms}) hold for sets and members. Indeed, a common basis for set theory, and mathematics as a whole, are the following \textbf{Zermelo-Fraenkel axioms}. They avoid issues like Russell's paradox which arise in the more intuitive ``naive'' set theory. Each axiom can be stated more mathematically with the notation of predicate logic, including: variables (letters representing sets), the logical connectors $\wedge$ $\vee$ $\neg$ $\iff$ and $\implies$, the quantifiers $\forall$ and $\exists$, and perhaps the constants $1$ and $0$. We hold each proposition/predicate logic statement to be either true or false (law of the excluded middle).
 \begin{enumerate}[label=Ax\arabic*.]
-\item \textbf{Extensionality}: If two sets have the same members, then they are equal:
-\[ \forall A\ \forall B\ [\forall x\ (x \in A \iff x \in B) \implies A = B]. \]
-\item \textbf{Empty set}: There is a set, $\emptyset$, having no members:
-\[ \exists B\ \forall x\ x \notin B. \]
-\item \textbf{Pairing}: For any sets $u$ and $v$, there exists a set, denoted $\{ u, v \}$, whose members are exactly $u$ and $v$:
-\[ \forall u\ \forall v\ \exists B\ \forall x\ (x \in B \iff x = u \vee x = v) \]
-\item \textbf{Union}: For any set $A$, there exists a set whose members are exactly the members of members of $A$:
-\[ \forall A\ \exists B\ [\forall x\ (x \in B \iff (\exists a \in A) x \in a)]. \]
-\item \textbf{Power set}: For any set $a$, there exists a set whose members are exactly the subsets of $a$:
-\[ \forall a\ \exists B\ \forall x\ (x \in B \iff x \subseteq a). \]
-($x \subseteq a$ is taken to mean that $\forall t\ (t \in x \implies t \in a)$.)
-\item \textbf{Subset}: For each formula $\_$ not containing $B$, the following is an axiom:
-\[ \forall t_1\ \cdots \forall t_k\ \forall c\ \exists B\ \forall x\ (x \in B \iff x \in c \wedge \_) \]
-We require that $\_$ be a logic formula built from expressions of the form $a \in B$ and $a = b$, joined (with clear parenthesization) by only the symbols $\forall$, $\exists$, $\neg$, $\wedge$, $\vee$, $\implies$, and $\iff$.
+    \item \textbf{Extensionality}: If two sets have the same members, then they are equal:
+    \[ \forall A\ \forall B\ [\forall x\ (x \in A \iff x \in B) \implies A = B]. \]
+    \item \textbf{Empty set}: There is a set, $\emptyset$, having no members:
+    \[ \exists B\ \forall x\ x \notin B. \]
+    \item \textbf{Pairing}: For any sets $u$ and $v$, there exists a set, denoted $\{ u, v \}$, whose members are exactly $u$ and $v$:
+    \[ \forall u\ \forall v\ \exists B\ \forall x\ (x \in B \iff x = u \vee x = v) \]
+    \item \textbf{Union}: For any set $A$, there exists a set whose members are exactly the members of members of $A$:
+    \[ \forall A\ \exists B\ [\forall x\ (x \in B \iff (\exists a \in A) x \in a)]. \]
+    \item \textbf{Power set}: For any set $a$, there exists a set whose members are exactly the subsets of $a$:
+    \[ \forall a\ \exists B\ \forall x\ (x \in B \iff x \subseteq a). \]
+    ($x \subseteq a$ is taken to mean that $\forall t\ (t \in x \implies t \in a)$.)
+    \item \textbf{Subset}: For each formula $\_$ not containing $B$, the following is an axiom:
+    \[ \forall t_1\ \cdots \forall t_k\ \forall c\ \exists B\ \forall x\ (x \in B \iff x \in c \wedge \_) \]
+    We require that $\_$ be a logic formula built from expressions of the form $a \in B$ and $a = b$, joined (with clear parenthesization) by only the symbols $\forall$, $\exists$, $\neg$, $\wedge$, $\vee$, $\implies$, and $\iff$.
 \end{enumerate}
 There are a few other axioms, to be introduced later.
 
@@ -53,11 +57,11 @@ However, it is sometimes useful to discuss all sets which have a certain propert
 
 The union axiom clearly defines a \textbf{union} operation ($\cup$), while the subset operation implies \textbf{intersection} ($\cap$), \textbf{set difference} ($\setminus$), and even \textbf{symmetric difference} ($\triangle$) operations. We can also discuss the \textbf{set complement}, $A^c$, which is really just $\Omega \setminus A$, with $\Omega$ typically implied by the context. These operations have many algebra-like properties (proofs can be an exercise):
 \begin{itemize}
-\item Pairwise union and intersection are \emph{commutative}.
-\item Three-wise union and intersection are \emph{associative}.
-\item \emph{Distributive laws}: $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$, and $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$. Similarly for infinite union and intersection, $A \cap \bigcup \mathscr B = \bigcup_{X \in \mathscr B} (A \cap X)$ and $A \cup \bigcap \mathscr B = \bigcap_{X \in \mathscr B} (A \cup X)$, provided that $\mathscr B \neq \emptyset$.
-\item \emph{De Morgan's laws}: $(A \cup B)^c = A^c \cap B^c$ and $(A \cap B)^c = A^c \cup B^c$. Likewise, for $\mathscr A \neq \emptyset$, $\left(\bigcup \mathscr A\right)^c = \bigcap_{X \in \mathscr A} X^c$ and $\left(\bigcap \mathscr A\right)^c = \bigcup_{X \in \mathscr A} X^c$.
-\item \emph{Identities involving $\emptyset$}: $A \cup \emptyset = A$, $A \cap \emptyset = \emptyset$, and $A \cap (C \setminus A) = \emptyset$.
+    \item Pairwise union and intersection are \emph{commutative}.
+    \item Three-wise union and intersection are \emph{associative}.
+    \item \emph{Distributive laws}: $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$, and $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$. Similarly for infinite union and intersection, $A \cap \bigcup \mathscr B = \bigcup_{X \in \mathscr B} (A \cap X)$ and $A \cup \bigcap \mathscr B = \bigcap_{X \in \mathscr B} (A \cup X)$, provided that $\mathscr B \neq \emptyset$.
+    \item \emph{De Morgan's laws}: $(A \cup B)^c = A^c \cap B^c$ and $(A \cap B)^c = A^c \cup B^c$. Likewise, for $\mathscr A \neq \emptyset$, $\left(\bigcup \mathscr A\right)^c = \bigcap_{X \in \mathscr A} X^c$ and $\left(\bigcap \mathscr A\right)^c = \bigcup_{X \in \mathscr A} X^c$.
+    \item \emph{Identities involving $\emptyset$}: $A \cup \emptyset = A$, $A \cap \emptyset = \emptyset$, and $A \cap (C \setminus A) = \emptyset$.
 \end{itemize}
 
 \section{Relations and functions}
@@ -72,7 +76,7 @@ $\langle x, y \rangle$ appears in the second power set of $C$ if $C$ contains bo
 
 A \textbf{relation} is a set of ordered pairs (expressing this in predicate logic is left as an exercise to the reader). We proceed under the assumption that we know that some relation $R$ is a set that exists, and hence can be expressed in predicate logic. For this relation $R$, we sometimes write $xRy$ to denote $\langle x, y \rangle \in R$. One can use relations to encode information, such as the ordering of numbers, as we will see later on. We can define the \textbf{domain} (intuitively, the set of all $x$) and \textbf{range} (the set of all $y$) of a relation as one would expect, because for any $\langle x, y \rangle \in A$, we can find $x$ and $y$ in $\bigcup \bigcup A$, and use the subset axiom. We define the \textbf{field} to be the union of the domain and the range of a relation.
 
-\subsection{$n$-ary relations}
+\subsection{\texorpdfstring{$n$}{n}-ary relations}
 
 We inductively define the ordered $n$-tuple\footnote{It's kind of puzzling that we are using $n$, a natural number, to define mathematical machinery with which we'll later define the naturals, reals, etc. For now, please don't read too much into the usage of numbers in set theory definitions; rather, think about quantity as an intuitive notion. I'd argue we don't need a formal number system, so long as our heads can think of counting and inductive arguments.} as follows:
 \[ \langle t_1, \ldots, t_n \rangle = \langle \langle t_1, \ldots, t_{n - 1} \rangle t_n \rangle \]
@@ -89,48 +93,48 @@ A single-rooted function is called \textbf{one-to-one}.
 
 To any sets $A$, $F$, and $G$ (usually relations and, more strictly speaking, functions, but not necessarily), these definitions apply:
 \begin{enumerate}[label=(\alph*)]
-\item The \textbf{inverse} of $F$ is the set $F^{-1} = \{ \langle u, v \rangle | vFu \}$.
-\item The \textbf{composition} of $F$ and $G$ is $F \circ G = \{ \langle u, v \rangle | \exists t\ (uGt \wedge tFv) \}$.
-\item The \textbf{restriction} of $F$ to $A$ is $F \upharpoonright A = \{ \langle u, v \rangle | uFv \wedge u \in A \}$.
-\item The \textbf{image} of $A$ under $F$ is $F[A] = \operatorname{ran} (F \upharpoonright A)$.
+    \item The \textbf{inverse} of $F$ is the set $F^{-1} = \{ \langle u, v \rangle | vFu \}$.
+    \item The \textbf{composition} of $F$ and $G$ is $F \circ G = \{ \langle u, v \rangle | \exists t\ (uGt \wedge tFv) \}$.
+    \item The \textbf{restriction} of $F$ to $A$ is $F \upharpoonright A = \{ \langle u, v \rangle | uFv \wedge u \in A \}$.
+    \item The \textbf{image} of $A$ under $F$ is $F[A] = \operatorname{ran} (F \upharpoonright A)$.
 \end{enumerate}
 The existence of these sets is established by the subset axiom. Try showing this for one of them!
 
 \subsubsection{Theorems (proofs omitted)}
 
 \begin{enumerate}[label=\Alph*.]
-\setcounter{enumi}{4}
-\item For a set $F$, $\operatorname{dom} F^{-1} = \operatorname{ran} F$, and vice versa. If $F$ is a relation, $(F^{-1})^{-1} = F$.
-\item For any set $F$, $F^{-1}$ is a function iff $F$ is single-rooted. A relation $F$ is a function iff $F^{-1}$ is single-rooted.
-\item For a one-to-one function $F$, if $x \in \operatorname{dom} F$, then $F^{-1} (F(x)) = x$; if $y \in \operatorname{ran} F$, then $F(F^{-1}(y)) = y$.
-\item If $F$ and $G$ are functions, then the composition $F \circ G$ has domain $\{x \in \operatorname{dom} G | G(x) \in \operatorname{dom} F\}$.
-\item For any sets $F$ and $G$, $(F \circ G)^{-1} = G^{-1} \circ F^{-1}$.
-\item If $F : A \to B$ ($F$ is a function from $A$ to $B$: $\operatorname{dom} F = A$ and $\operatorname{ran} F \subseteq B$), with $A \neq \emptyset$,
-\begin{enumerate}[label=(\alph*)]
-\item there exists a function $G : B \to A$ such that $G \circ F = I_A$ iff $F$ is one-to-one;
-\item there exists a function $H : B \to A$ such that $F \circ H = I_B$ iff $F$ maps $A$ \textbf{onto} $B$ (so that $\operatorname{ran} F = B$).
-\end{enumerate}
+    \setcounter{enumi}{4}
+    \item For a set $F$, $\operatorname{dom} F^{-1} = \operatorname{ran} F$, and vice versa. If $F$ is a relation, $(F^{-1})^{-1} = F$.
+    \item For any set $F$, $F^{-1}$ is a function iff $F$ is single-rooted. A relation $F$ is a function iff $F^{-1}$ is single-rooted.
+    \item For a one-to-one function $F$, if $x \in \operatorname{dom} F$, then $F^{-1} (F(x)) = x$; if $y \in \operatorname{ran} F$, then $F(F^{-1}(y)) = y$.
+    \item If $F$ and $G$ are functions, then the composition $F \circ G$ has domain $\{x \in \operatorname{dom} G | G(x) \in \operatorname{dom} F\}$.
+    \item For any sets $F$ and $G$, $(F \circ G)^{-1} = G^{-1} \circ F^{-1}$.
+    \item If $F : A \to B$ ($F$ is a function from $A$ to $B$: $\operatorname{dom} F = A$ and $\operatorname{ran} F \subseteq B$), with $A \neq \emptyset$,
+    \begin{enumerate}[label=(\alph*)]
+        \item there exists a function $G : B \to A$ such that $G \circ F = I_A$ iff $F$ is one-to-one;
+        \item there exists a function $H : B \to A$ such that $F \circ H = I_B$ iff $F$ maps $A$ \textbf{onto} $B$ (so that $\operatorname{ran} F = B$).
+    \end{enumerate}
 \end{enumerate}
 
 Proving the second part of this last theorem requires a new axiom, the \textbf{axiom of choice}.
 \begin{enumerate}[label=Ax\arabic*.]
-\setcounter{enumi}{6}
-\item \textbf{Axiom of choice} (first form): For any relation $R$, there is a function $H \subseteq R$ with $\operatorname{dom} H = \operatorname{dom} R$.
+    \setcounter{enumi}{6}
+    \item \textbf{Axiom of choice} (first form): For any relation $R$, there is a function $H \subseteq R$ with $\operatorname{dom} H = \operatorname{dom} R$.
 \end{enumerate}
 
 We also have several more theorems:
 \begin{enumerate}[label=\Alph*.]
-\setcounter{enumi}{10}
-\item For any sets $F$, $A$, $B$, and/or $\mathscr A$,
-\begin{enumerate}
-\item The image of the union is the union of the images: $F[A \cup B] = F[A] \cup F[B]$ and $F[\bigcup \mathscr A] = \bigcup_{A \in \mathscr A} F[A]$.
-\item The image of an intersection is included in the intersection of the images: $F[A \cap B] \subseteq F[A] \cap F[B]$; $F[\bigcap \mathscr A] \subseteq \bigcap_{A \in \mathscr A} F[A]$.
-\item The image of the difference includes the difference of the images: $F[A] \setminus F[B] \subseteq F[A \setminus B]$.
-\end{enumerate}
-Equality holds in the last two if $F$ is a single-rooted set, i.e. the tuples in $F$ form a single-rooted relation.
-\begin{itemize}
-\item As a corollary, since a function $G$ always has a single-rooted inverse, we have from this theorem that $G^{-1} [\bigcup \mathscr A] = \bigcup_{A \in \mathscr A} G^{-1} [A]$, $G^{-1} [\bigcap \mathscr A] = \bigcap_{A \in \mathscr A} G^{-1} [A]$, and $G^{-1} [A \setminus B] = G^{-1} [A] \setminus G^{-1} [B]$.
-\end{itemize}
+    \setcounter{enumi}{10}
+    \item For any sets $F$, $A$, $B$, and/or $\mathscr A$,
+    \begin{enumerate}
+        \item The image of the union is the union of the images: $F[A \cup B] = F[A] \cup F[B]$ and $F[\bigcup \mathscr A] = \bigcup_{A \in \mathscr A} F[A]$.
+        \item The image of an intersection is included in the intersection of the images: $F[A \cap B] \subseteq F[A] \cap F[B]$; $F[\bigcap \mathscr A] \subseteq \bigcap_{A \in \mathscr A} F[A]$.
+        \item The image of the difference includes the difference of the images: $F[A] \setminus F[B] \subseteq F[A \setminus B]$.
+    \end{enumerate}
+    Equality holds in the last two if $F$ is a single-rooted set, i.e. the tuples in $F$ form a single-rooted relation.
+    \begin{itemize}
+        \item As a corollary, since a function $G$ always has a single-rooted inverse, we have from this theorem that $G^{-1} [\bigcup \mathscr A] = \bigcup_{A \in \mathscr A} G^{-1} [A]$, $G^{-1} [\bigcap \mathscr A] = \bigcap_{A \in \mathscr A} G^{-1} [A]$, and $G^{-1} [A \setminus B] = G^{-1} [A] \setminus G^{-1} [B]$.
+    \end{itemize}
 \end{enumerate}
 
 Several final notes, applicable to the notation used above: If $I$ is a set called the index set, and $F$ is a function whose domain includes $I$, then we can define the union over the index set as $\bigcup_{i \in I} F(i) = \bigcup \{F(i) | i \in I\} = \{x | (\exists i \in I) x \in F(i)\}$. Also, for any sets $A$ and $B$, we can use power set, the existence of the Cartesian product $A \times B$, and subset to construct the set of all functions $F : A \to B$, denoted as $\prescript{A}{} B$.
@@ -139,8 +143,8 @@ Several final notes, applicable to the notation used above: If $I$ is a set call
 
 Let $I$ be some set and $H$ some function whose domain includes $I$. $\bigtimes_{i \in I} H(i)$ is defined as set of all functions from $I$ such that $\forall i\ i \in I \implies f(i) \in H(i)$. If we further impose that all $H(i) \neq \emptyset$, then we can re-write the axiom of choice:
 \begin{enumerate}[label=Ax\arabic*.]
-\setcounter{enumi}{6}
-\item \textbf{Axiom of choice} (second form): For any set $I$ and any function $H$ with domain $I$, if $H(i) \neq \emptyset$ for all $i \in I$, then $\bigtimes_{i \in I} H(i) \neq \emptyset$.
+    \setcounter{enumi}{6}
+    \item \textbf{Axiom of choice} (second form): For any set $I$ and any function $H$ with domain $I$, if $H(i) \neq \emptyset$ for all $i \in I$, then $\bigtimes_{i \in I} H(i) \neq \emptyset$.
 \end{enumerate}
 
 \subsection{Equivalence relations}
@@ -163,9 +167,9 @@ Let $A$ be any set. A \textbf{linear ordering} (\textbf{total ordering}) on $A$ 
 
 Set theory takes a constructive, rather than axiomatic approach, to numbers, in that numbers are defined as sets rather than their own entities obeying certain axioms. We define the \textbf{successor} $a^+$ of a set $a$ as $a^+ = a \cup \{a\}$; the number $0$ is defined to be $\emptyset$. But before we continue, we write another axiom to help us:
 \begin{enumerate}[label=Ax\arabic*.]
-\setcounter{enumi}{7}
-\item \textbf{Infinity axiom}: There exists an \textbf{inductive set}:
-\[ \exists A\ \left[ \emptyset \in A \wedge (\forall a \in A)\ a^+ \in A \right] \]
+    \setcounter{enumi}{7}
+    \item \textbf{Infinity axiom}: There exists an \textbf{inductive set}:
+    \[ \exists A\ \left[ \emptyset \in A \wedge (\forall a \in A)\ a^+ \in A \right] \]
 \end{enumerate}
 
 Using this axiom and the subset axiom, we can construct a set, $\omega$, containing the elements which appear in every inductive set. Let us call the elements of $\omega$ \textbf{natural numbers}, sets which belong to every inductive set. $\omega$ can be shown rigorously to be inductive, and a subset of every other inductive set, as our intuition tells us. The \textbf{induction principle} for $\omega$ observes that any inductive subset of $\omega$ is (coincides with) $\omega$. This is a powerful, widely accepted proof idea which goes beyond basic logic and allows people to prove notions using the natural numbers. For instance, every natural number except $0$ is the successor of some other natural number.
@@ -176,7 +180,7 @@ A set $A$ is defined to be \textbf{transitive} (not to be confused with our prev
 \[ \exists a (x \in a \in A) \implies x \in A \]
 For a transitive set $a$, $\bigcup (a^+) = a$. Every natural number is a transitive set. And every the set of natural numbers, $\omega$, is a transitive set.
 
-\subsection{Recursion on $\omega$}
+\subsection{Recursion on \texorpdfstring{$\omega$}{omega}}
 
 The recursion theorem (very involved proof) says that if we have a set $A$, a set $a \in A$, and a function $F : A \to A$, there exists a unique function $h : \omega \to A$ such that $h(0) = a$ and for every $n \in \omega$, $h(n^+) = F(h(n))$.
 
@@ -186,7 +190,7 @@ A \textbf{binary operation} is a function from $A \times A$ to $A$. The recursio
 
 Associativity and commutativity of addition, the distributive law, and associativity and commutativity of multiplication can by proven by induction in set theory.
 
-\subsection{Ordering on $\omega$}
+\subsection{Ordering on \texorpdfstring{$\omega$}{omega}}
 
 For $x, y \in \omega$, we say that $x < y$ if $x \in y$. This ordering relation is transitive because each natural number is a transitive set, so $m \in n \wedge n \in p \implies m \in p$. It is a linear ordering because it also satisfies trichotomy: for all $m$ and $n$ in $\omega$, either $m \in n$, $m = n$, or $n \in m$, but not more than one of these. We define the \textbf{proper subset} $\subset$ as $A \subset B$ iff $A \subseteq B$ and $A \neq B$. For $m, n \in \omega$, $m \in n \iff m \subset n$, and $m \in n \vee m = n \iff m \subseteq n$. For any natural numbers $m, n, p \in \omega$, $m \in n \iff m + p \in n + p$, and if $p \neq 0$, $m \in n \iff m \cdot p \in n \cdot p$. As a consequence, and by trichotomy, $m + p = n + p \implies m = n$, and $m \cdot p = n \cdot p \wedge p \neq 0 \implies m = n$.
 
@@ -206,9 +210,9 @@ To obtain an ordering relation over the integers, we first observe that if $\lan
 
 Lastly, let us draw a comparison between the natural numbers and the integers. Define $E : \omega \to \mathbb Z$ so that $E(n) = \left[ \langle n, 0 \rangle \right]$. $E$ maps $\omega$ one-to-one into $\mathbb Z$, and satisfies these properties for any natural numbers $m$ and $n$:
 \begin{enumerate}[label=(\alph*)]
-\item $E(m + n) = E(m) +_Z E(n)$
-\item $E(m \cdot n) = E(m) \cdot_Z E(n)$
-\item $m \in n$ iff $E(m) <_Z E(n)$
+    \item $E(m + n) = E(m) +_Z E(n)$
+    \item $E(m \cdot n) = E(m) \cdot_Z E(n)$
+    \item $m \in n$ iff $E(m) <_Z E(n)$
 \end{enumerate}
 So although $\omega$ is not a subset of $\mathbb Z$, $\mathbb Z$ extends $\omega$ in a way that preserves beautifully the operations and properties of addition, multiplication, and ordering.
 
@@ -224,20 +228,20 @@ To obtain an ordering relation, we again follow our intuition to arrive at $\lef
 
 Finally, like before, we can draw a comparison between the integers and the rational numbers. Define $E : \mathbb Z \to \mathbb Q$ so that $E(n) = \left[ \langle n, 1 \rangle \right]$. This one-to-one function obeys similar properties as the equivalent function for the integers:
 \begin{enumerate}[label=(\alph*)]
-\item $E(a +_Z b) = E(a) +_Q E(b)$
-\item $E(a \cdot_Z b) = E(a) \cdot_Q E(b)$
-\item $E(0_Z) = 0_Q$ and $E(1_Z) = 1_Q$
-\item $a <_Z b$ iff $E(a) <_Q E(b)$
+    \item $E(a +_Z b) = E(a) +_Q E(b)$
+    \item $E(a \cdot_Z b) = E(a) \cdot_Q E(b)$
+    \item $E(0_Z) = 0_Q$ and $E(1_Z) = 1_Q$
+    \item $a <_Z b$ iff $E(a) <_Q E(b)$
 \end{enumerate}
 
 \subsection{Real numbers}
 
 Long ago, mathematicians discovered that certain quantities simply could not be measured to complete precision with rational numbers. The real number system came along to circumvent this issue. The real numbers can extend from the rationals in several ways. One way is to define the real numbers as the set of all Dedekind cuts. A \textbf{Dedekind cut} is a subset $x \subseteq \mathbb Q$ such that
 \begin{enumerate}[label=(\alph*)]
-\item $\emptyset \neq x \neq \mathbb Q$,
-\item $x$ is ``closed downward,'' i.e.
-\[ q \in x \wedge r < q \implies r \in x, \]
-\item and $x$ has no largest member.
+    \item $\emptyset \neq x \neq \mathbb Q$,
+    \item $x$ is ``closed downward,'' i.e.
+    \[ q \in x \wedge r < q \implies r \in x, \]
+    \item and $x$ has no largest member.
 \end{enumerate}
 
 A linear ordering is obtained so that $x <_R y$ iff $x \subset y$. An \textbf{upper bound} on a set of real numbers $A$ is a real number $x$ such that for all $y \in A$, $y \leq x$. Any bounded, nonempty subset of $\mathbb R$ has a least upper bound in $\mathbb R$.
@@ -250,9 +254,9 @@ We define the addition operation so that for any $x, y \in \mathbb R$, $x +_R y 
 
 In an effort to count sets which may be infinite, we say two sets $A$ and $B$ are \textbf{equinumerous} ($A \approx B$) iff there exists a one-to-one function from $A$ onto $B$. Equinumerosity has the property of being reflexive, symmetric, and transitive for all sets $A$, $B$, and $C$:
 \begin{enumerate}[label=(\alph*)]
-\item $A \approx A$.
-\item If $A \approx B$, then $B \approx A$.
-\item If $A \approx B$ and $B \approx C$, then $A \approx C$.
+    \item $A \approx A$.
+    \item If $A \approx B$, then $B \approx A$.
+    \item If $A \approx B$ and $B \approx C$, then $A \approx C$.
 \end{enumerate}
 For example, $\omega$ is not equinumerous to $\mathbb R$ by a diagonalization argument; similarly, no set is equinumerous to its power set.
 
@@ -269,20 +273,20 @@ Lastly, any subset of a finite set is finite. This is accomplished through a lem
 % TODO: brush up on this section. Why can we always name sets K and L for a cardinal number? Possibly dumb question, but isn't this like using the axiom of choice?
 To extend addition, multiplication, and exponentiation to all sets, including infinite sets, we will establish notions of cardinal arithmetic. For cardinal numbers $\kappa$ and $\lambda$, define these operations accordingly:
 \begin{enumerate}
-\item $\kappa + \lambda = \operatorname{card}(K \cup L)$, with $K$ and $L$ \emph{disjoint} and of cardinalities $\kappa$ and $\lambda$.
-\item $\kappa \cdot \lambda = \operatorname{card}(K \times L)$, with $K$ and $L$ of cardinalities $\kappa$ and $\lambda$.
-\item $\kappa^\lambda = \operatorname{card} \prescript{L}{}K$, with $K$ and $L$ of cardinalities $\kappa$ and $\lambda$.
+    \item $\kappa + \lambda = \operatorname{card}(K \cup L)$, with $K$ and $L$ \emph{disjoint} and of cardinalities $\kappa$ and $\lambda$.
+    \item $\kappa \cdot \lambda = \operatorname{card}(K \times L)$, with $K$ and $L$ of cardinalities $\kappa$ and $\lambda$.
+    \item $\kappa^\lambda = \operatorname{card} \prescript{L}{}K$, with $K$ and $L$ of cardinalities $\kappa$ and $\lambda$.
 \end{enumerate}
 It can be shown that for each of these above operations, we'll get the same result for any suitable $K$ and $L$.
 
 Cardinal arithmetic follows similar properties as other forms of arithmetic. For any cardinal numbers $\kappa$, $\lambda$, and $\mu$:
 \begin{enumerate}
-\item $\kappa + \lambda = \lambda + \kappa$ and $\kappa \cdot \lambda = \lambda \cdot \kappa$.
-\item $\kappa + (\lambda + \mu) = (\kappa + \lambda) + \mu$ and $\kappa \cdot (\lambda \cdot \mu) = (\kappa \cdot \lambda) \cdot \mu$.
-\item $\kappa \cdot (\lambda + \mu) = \kappa \cdot \lambda + \kappa \cdot \mu$.
-\item $\kappa^{\lambda + \mu} = \kappa^\lambda \cdot \kappa^\mu$.
-\item $(\kappa \cdot \lambda)^\mu = \kappa^\mu \cdot \lambda^\mu$.
-\item $(\kappa^\lambda)^\mu = \kappa^{\lambda \cdot \mu}$.
+    \item $\kappa + \lambda = \lambda + \kappa$ and $\kappa \cdot \lambda = \lambda \cdot \kappa$.
+    \item $\kappa + (\lambda + \mu) = (\kappa + \lambda) + \mu$ and $\kappa \cdot (\lambda \cdot \mu) = (\kappa \cdot \lambda) \cdot \mu$.
+    \item $\kappa \cdot (\lambda + \mu) = \kappa \cdot \lambda + \kappa \cdot \mu$.
+    \item $\kappa^{\lambda + \mu} = \kappa^\lambda \cdot \kappa^\mu$.
+    \item $(\kappa \cdot \lambda)^\mu = \kappa^\mu \cdot \lambda^\mu$.
+    \item $(\kappa^\lambda)^\mu = \kappa^{\lambda \cdot \mu}$.
 \end{enumerate}
 
 If $m$ and $n$ are finite cardinals, then addition, multiplication, and exponentiation produce the same result in cardinal arithmetic as in regular arithmetic:
@@ -295,33 +299,33 @@ If $A$ and $B$ are finite, then $A \cup B$, $A \times B$, and $\prescript{B}{} A
 
 \subsection{Ordering cardinal numbers}
 
-We say that $A$ is \textbf{dominated} by set $B$ ($A \preccurlyeq B$) iff there is a one-to-one function from $A$ into $B$, or equivalently, iff $A$ is equinumerous with a subset of $B$ (including $B$ itself). We conveniently define that $\operatorname{card} K \leq \operatorname{card} L \iff K \preccurlyeq L$. Naturally, we likewise say that $\operatorname{card} K < \operatorname{card} L \iff K \prec L \iff K \preccurlyeq L \wedge K \napprox L$.\footnote{Since we have not established the class of all cardinal numbers as a set, we technically have not rigorously defined this ordering as a relation. For now, we can consider it an extension of our notation, that using any one of the above statements implies them all.}
+We say that $A$ is \textbf{dominated} by set $B$ ($A \preccurlyeq B$) iff there is a one-to-one function from $A$ into $B$, or equivalently, iff $A$ is equinumerous with a subset of $B$ (including $B$ itself). We conveniently define that $\operatorname{card} K \leq \operatorname{card} L \iff K \preccurlyeq L$. Naturally, we likewise say that $\operatorname{card} K < \operatorname{card} L \iff K \prec L \iff K \preccurlyeq L \wedge K \not\approx L$.\footnote{Since we have not established the class of all cardinal numbers as a set, we technically have not rigorously defined this ordering as a relation. For now, we can consider it an extension of our notation, that using any one of the above statements implies them all.}
 
 The following properties hold for all cardinal numbers $\kappa$, $\lambda$, and $\mu$:
 \begin{enumerate}
-\item $\kappa \leq \kappa$.
-\item $\kappa \leq \lambda \leq \mu \implies \kappa \leq \mu$.
-\item $\kappa \leq \lambda \wedge \lambda \leq \kappa \implies \kappa = \lambda$. This is one half of the \textbf{Schröder-Bernstein Theorem}, the other half being: if $A \preccurlyeq B$ and $B \preccurlyeq A$, then $A \approx B$.
-\item Either $\kappa \leq \lambda$ or $\lambda \leq \kappa$. Proving this requires the axiom of choice.
+    \item $\kappa \leq \kappa$.
+    \item $\kappa \leq \lambda \leq \mu \implies \kappa \leq \mu$.
+    \item $\kappa \leq \lambda \wedge \lambda \leq \kappa \implies \kappa = \lambda$. This is one half of the \textbf{Schröder-Bernstein Theorem}, the other half being: if $A \preccurlyeq B$ and $B \preccurlyeq A$, then $A \approx B$.
+    \item Either $\kappa \leq \lambda$ or $\lambda \leq \kappa$. Proving this requires the axiom of choice.
 \end{enumerate}
 These order-preserving properties also hold:
 \begin{enumerate}[label=(\alph*)]
-\item $\kappa \leq \lambda \implies \kappa + \mu \leq \lambda + \mu$.
-\item $\kappa \leq \lambda \implies \kappa \cdot \mu \leq \lambda \cdot \mu$.
-\item $\kappa \leq \lambda \implies \kappa^\mu \leq \lambda^\mu$.
-\item $\kappa \leq \lambda \implies \mu^\kappa \leq \mu^\lambda$.
+    \item $\kappa \leq \lambda \implies \kappa + \mu \leq \lambda + \mu$.
+    \item $\kappa \leq \lambda \implies \kappa \cdot \mu \leq \lambda \cdot \mu$.
+    \item $\kappa \leq \lambda \implies \kappa^\mu \leq \lambda^\mu$.
+    \item $\kappa \leq \lambda \implies \mu^\kappa \leq \mu^\lambda$.
 \end{enumerate}
 
 \subsection{Axiom of choice}
 
 A couple times, we have already encountered the axiom of choice, which allows us to select members from nonempty sets. There are many equivalent formulations. Here are six different statements of the axiom:
 \begin{enumerate}
-\item For any relation $R$, there is a function $F \subseteq R$ with $\operatorname{dom} F = \operatorname{dom} R$.
-\item The Cartesian product of nonempty sets is always nonempty. For a function $H$ with $\operatorname{dom} H = I$, such that $(\forall i \in I) H(i) \neq \emptyset$, there is a function $f$ with $\operatorname{dom} f = I$ such that $(\forall i \in I) f(i) \in H(i)$.
-\item For any set $A$ there is a ``choice function'' $F$ such that $\operatorname{dom}$ is the set of nonempty subsets of $A$, and $F(B) \in B$ for every nonempty $B \subseteq A$.
-\item Suppose each member of a set $\mathscr A$ is nonempty, and every two distinct members of $\mathscr A$ are disjoint. Then there exists a set $C$ containing exactly one element from each member of $\mathscr A$.
-\item For any two sets $C$ and $D$, either $C \preccurlyeq D$ or $D \preccurlyeq C$. For any cardinal numbers $\kappa$ and $\lambda$, either $\kappa \leq \lambda$ or $\lambda \leq \kappa$.
-\item \textbf{Zorn's lemma}: Let $\mathscr A$ be a set such that for every chain $\mathscr B \subseteq \mathscr A$, $\bigcup \mathscr B \in \mathscr A$. ($\mathscr B$ is a \textbf{chain} iff for any $C, D \in \mathscr B$, either $C \subseteq D$ or $D \subseteq C$.) Then $\mathscr A$ contains an element $M$ (a ``maximal'' element) such that $M$ is not a subset of any other set in $\mathscr A$.
+    \item For any relation $R$, there is a function $F \subseteq R$ with $\operatorname{dom} F = \operatorname{dom} R$.
+    \item The Cartesian product of nonempty sets is always nonempty. For a function $H$ with $\operatorname{dom} H = I$, such that $(\forall i \in I) H(i) \neq \emptyset$, there is a function $f$ with $\operatorname{dom} f = I$ such that $(\forall i \in I) f(i) \in H(i)$.
+    \item For any set $A$ there is a ``choice function'' $F$ such that $\operatorname{dom}$ is the set of nonempty subsets of $A$, and $F(B) \in B$ for every nonempty $B \subseteq A$.
+    \item Suppose each member of a set $\mathscr A$ is nonempty, and every two distinct members of $\mathscr A$ are disjoint. Then there exists a set $C$ containing exactly one element from each member of $\mathscr A$.
+    \item For any two sets $C$ and $D$, either $C \preccurlyeq D$ or $D \preccurlyeq C$. For any cardinal numbers $\kappa$ and $\lambda$, either $\kappa \leq \lambda$ or $\lambda \leq \kappa$.
+    \item \textbf{Zorn's lemma}: Let $\mathscr A$ be a set such that for every chain $\mathscr B \subseteq \mathscr A$, $\bigcup \mathscr B \in \mathscr A$. ($\mathscr B$ is a \textbf{chain} iff for any $C, D \in \mathscr B$, either $C \subseteq D$ or $D \subseteq C$.) Then $\mathscr A$ contains an element $M$ (a ``maximal'' element) such that $M$ is not a subset of any other set in $\mathscr A$.
 \end{enumerate}
 Note that this axiom has been fairly controversial, so mathematicians make explicit mention whenever they use it.
 
@@ -363,32 +367,99 @@ Next, we have a well ordering $<$ and would like to define a function $F$ so tha
 
 Unfortunately, we are unable to prove the transfinite recursion theorem schema, and a number of ideas about sets like inductive sets, without the help of another axiom.
 \begin{enumerate}[label=Ax\arabic*.]
-\setcounter{enumi}{8}
-\item \textbf{Replacement axioms}: For any formula $\varphi (x, y)$ not containing the letter $B$, then the following is an axiom:
-\begin{multline*}
-\forall A \Big[ (\forall x \in A) \forall y_1 \forall y_2 \left( \varphi (x, y_1) \wedge \varphi (x, y_2) \implies y_1 = y_2 \right) \\
-\implies \exists B \forall y \left(y \in B \iff (\exists x \in A) \varphi (x, y)\right) \Big]
-\end{multline*}
+    \setcounter{enumi}{8}
+    \item \textbf{Replacement axioms}: For any formula $\varphi (x, y)$ not containing the letter $B$, then the following is an axiom:
+    \begin{multline*}
+        \forall A \Big[ (\forall x \in A) \forall y_1 \forall y_2 \left( \varphi (x, y_1) \wedge \varphi (x, y_2) \implies y_1 = y_2 \right) \\
+        \implies \exists B \forall y \left(y \in B \iff (\exists x \in A) \varphi (x, y)\right) \Big]
+    \end{multline*}
 \end{enumerate}
 Intuitively, $\varphi (x, y)$ can be read as ``$x$ nominates $y$''; the axiom supposes that each member of $A$ nominates at most one object, and concludes that the collection of all nominees is a set, and furthermore a unique set.
 
 \subsection{Epsilon-images}
 
+% TODO: using double brackets anywhere?
 Let $<$ be a well ordering on $A$ and take $\gamma (x, y)$ to be the formula $y = \operatorname{ran} x$. By the transfinite recursion theorem, we can obtain a unique function $E$ with domain $A$ such that for any $t \in A$, $E(t) = \operatorname{ran} (E \upharpoonright \operatorname{seg} t) = E[\operatorname{seg} t] = \{ E(x) | x < t \}$. Let $\alpha = \operatorname{ran} E$ be the \textbf{$\in$-image} of the well-ordered structure $\langle A, < \rangle$. Then
 \begin{enumerate}[label=(\alph*)]
-\item $E(t) \notin E(t)$ for all $t \in A$.
-\item $E$ maps $A$ one-to-one onto $\alpha$.
-\item For any $s$ and $t$ in $A$, $s < t$ iff $E(s) \in E(t)$.
-\item $\alpha$ is a transitive set.
+    \item $E(t) \notin E(t)$ for all $t \in A$.
+    \item $E$ maps $A$ one-to-one onto $\alpha$.
+    \item For any $s$ and $t$ in $A$, $s < t$ iff $E(s) \in E(t)$.
+    \item $\alpha$ is a transitive set.
 \end{enumerate}
-The binary relation (on $\alpha$) $\in_\alpha = \{ \langle x, y \rangle \in \alpha \times \alpha | x \in y \}$ is a well ordering on $\alpha$, under these assumptions.
+The binary relation (on $\alpha$) $\in_\alpha$ is defined so that $\in_\alpha = \{ \langle x, y \rangle \in \alpha \times \alpha | x \in y \}$.
 
 \subsection{Isomorphisms}
 
+For structures $\langle A, R \rangle$ and $\langle B, S \rangle$, an \textbf{isomorphism} from $\langle A, R \rangle$ onto $\langle B, S \rangle$ is a one-to-one function $f$ from $A$ onto $B$ such that $x R y$ iff $f(x) S f(y)$. If an isomorphism exists, then one structure is isomorphic to the other ($\langle A, R \rangle \cong \langle B, S \rangle$). For any structures $\langle A, R \rangle$, $\langle B, S \rangle$, and $\langle C, T \rangle$,
+\begin{enumerate}[label=]
+    \item $\langle A, R \rangle \cong \langle A, R \rangle$,
+    \item $\langle A, R \rangle \cong \langle B, S \rangle \implies \langle B, S \rangle \cong \langle A, R \rangle$,
+    \item $\langle A, R \rangle \cong \langle B, S \rangle \cong \langle C, T \rangle \implies \langle A, R \rangle \cong \langle C, T \rangle$.
+\end{enumerate}
 
+Now, if $f$ is a one-to-one function from $A$ into $B$, and $<_B$ is a partial ordering on $B$, then for $<_A$ on $A$ defined by
+\[ x <_A y \iff f(x) <_B f(y), \]
+\begin{enumerate}[label=(\alph*)]
+    \item $<_A$ is a partial ordering on $A$;
+    \item if $<_B$ is a linear ordering on $B$, then $<_A$ is a linear ordering on $A$; and
+    \item if $<_B$ is a well ordering on $B$, then $<_A$ is a well ordering on $A$.
+\end{enumerate}
+If $\langle A, <_A \rangle$ and $\langle B, <_B \rangle$ are isomorphic, then if one is a partially, or linearly, or well ordered structure, so is the other. Having proven this, we conclude that $\alpha$ is a transitive set and $\in_\alpha$ is a well ordering on $\alpha$.
 
 \subsection{Ordinal numbers}
 
+% TODO: check "e.g.", "i.e."
+Now, we would like to assign a ``number'' to a well-ordered structure to measure its ``length,'' much like we assigned cardinal numbers to sets to measure their size. Two well-ordered structures should have the same number iff they look alike, i.e.\ are isomorphic. First we observe that two well-ordered structures are isomorphic iff they have the same $\in$-image. Now, we simply use the $\in$-image of $\langle A, < \rangle$ as the \textbf{ordinal number} of the structure, assuming that $<$ is a well ordering on $A$.
 
+If $\langle C, <^\circ \rangle = \langle C, < \cap (C \times C) \rangle$, then if $<$ is a partial ordering on $A$ and $C \subseteq A$, then $<^\circ$ is a partial ordering on $C$ (and the same if we replace ``partial'' with ``linear'' or ``well''). For any two well-ordered structures, either they are isomorphic ($\langle A, <_A \rangle \cong \langle B, <_B \rangle$), or $\langle A, <_A \rangle \cong \langle \operatorname{seg} b, <_B^\circ \rangle$ for some $b \in B$, or $\langle \operatorname{seg} a, <_A^\circ \rangle \cong \langle B, <_B \rangle$ for some $a \in A$.
+
+A set $A$ is defined to be \textbf{well ordered by epsilon} iff the relation $\in_A = \{ \langle x, y \rangle \in A \times A | x \in y \}$ is a well ordering on $A$. It turns out that the ordinal numbers are exactly the transitive sets that are well ordered by epsilon. If $\alpha$ is a transitive set well ordered by epsilon, then not only is $\alpha$ an ordinal number, but also $\alpha$ is the $\in$-image of $\langle \alpha, \in_\alpha \rangle$. Although the class of ordinal numbers is not a set, it is a transitive class well ordered by epsilon; for any ordinal numbers $\alpha$, $\beta$, and $\gamma$:
+\begin{enumerate}[label=(\alph*)]
+    \item Any member of $\alpha$ is itself an ordinal number.
+    \item $\alpha \in \beta \in \gamma \implies \alpha \in \gamma$.
+    \item $\alpha \notin \alpha$.
+    \item Exactly one of $\alpha \in \beta$, $\alpha = \beta$, or $\beta \in \alpha$ holds.
+    \item Any nonempty set $S$ of ordinal numbers has a least element $\mu$ ($\mu \in \alpha$ or $\mu = \alpha$ for every $\alpha \in S$).
+\end{enumerate}
+Any transitive set of ordinal numbers is itself an ordinal number. $0$ is an ordinal number. If $\alpha$ is any ordinal number, $\alpha^+$ is an ordinal number. If $A$ is any set of ordinal numbers, then $\bigcup A$ is also an ordinal number.
+
+The ordinal numbers come in the following order: first $0$, then $0^+ = 1$, then the following natural numbers; following the natural numbers comes $\bigcup \omega = \omega$, and then $\omega+, \omega^{++}, \ldots$; following all of these countable ordinals come the uncountable ordinals, starting with $\Omega$, the set of all countable ordinals. The \textbf{Burali-Forti Theorem} shows there is no set to which every ordinal number belongs.
+
+\subsection{Debts paid}
+
+Now, we prove some assertions left outstanding in the previous chapter. \textbf{Hartogs' Theorem} states that for any set $A$, there is an ordinal not dominated by $A$, where $B$ is dominated by $A$ ($B \preccurlyeq A$) iff $B$ is equinumerous to a subset of $A$. The \textbf{Well-Ordering Theorem}, which depends on the axiom of choice, states that for any set $A$, there is a well ordering on $A$. A variant of the Well-Ordering Theorem, the \textbf{Numeration Theorem}, states that any set is equinumerous to some ordinal number. The \textbf{cardinal number} of any set $A$ ($\operatorname{card} A$) is defined as the least ordinal equinumerous to $A$. And now, for any sets $A$ and $B$, $\operatorname{card} A = \operatorname{card} B$ iff $A \approx B$, and for a finite set $A$, $\operatorname{card} A$ is the unique natural number equinumerous to $A$.
+
+\subsection{Rank}
+
+Let us attempt to define for every ordinal number $\alpha$ the set $V_\alpha$ which contains those sets whose members are all in some $V_\beta$ for $\beta$ less than $\alpha$:
+\begin{align*}
+    a \in V_\alpha &\iff a \subseteq V_\beta &\text{for some $\beta \in \alpha$} \\
+    &\iff a \in \mathscr P V_\beta &\text{for some $\beta \in \alpha$}
+\end{align*}
+Or, equivalently, $V_\alpha = \bigcup \{ \mathscr P V_\beta | \beta \in \alpha \}$.
+
+First, we show that for any ordinal number $\delta$, there is a function $F_\delta$ with domain $\delta$ such that $F_\delta (\alpha) = \bigcup \{ \mathscr P F_\delta (\beta) | \beta \in \alpha \}$ for every $\alpha \in \delta$. With this function definition, for any ordinal numbers $\delta$ and $\epsilon$, $F_\delta (\alpha) = F_\epsilon (\alpha)$ for all $\alpha \in \delta \cap \epsilon$. This shows that there is one unique $F_\delta$.
+
+Now, we can unambiguously define $V_\alpha$. For $\alpha$ an ordinal number, define $V_\alpha$ to be the set $F_\delta (\alpha)$, where $\delta$ is any ordinal greater than $\alpha$ (e.g.\ $\delta = \alpha^+$). Then for any ordinal number $\alpha$, $V_\alpha = \bigcup \{ \mathscr P V_\beta | \beta \in \alpha \}$. For any ordinal number $\alpha$, $V_\alpha$ is a transitive set, and the following hold:
+\begin{enumerate}[label=(\alph*)]
+    \item For ordinals $\beta \in \alpha$ we have $V_\beta \subseteq V_\alpha$.
+    \item $V_0 = \emptyset$.
+    \item $V_{\alpha^+} = \mathscr P V_\alpha$ for any ordinal number $\alpha$.
+    \item $V_\gamma = \bigcup_{\beta \in \gamma} V_\beta$ for any limit ordinal\footnote{There are three kinds of ordinals: $0$; \textbf{successor ordinals}, of the form $\alpha^+$ for a smaller ordinal $\alpha$; and lastly \textbf{limit ordinals}. If $\gamma$ is a limit ordinal and $\beta \in \gamma$, then $\beta^+ \in \gamma$.} $\gamma$.
+\end{enumerate}
+
+We say a set $A$ is \textbf{grounded} iff $A \subseteq V_\alpha$ for some ordinal number $\alpha$. Then the \textbf{rank} of $A$ ($\operatorname{rank} A$) is the least such ordinal $\alpha$. It follows that if $a \in A$ and $A$ is grounded, then $a$ is grounded and $\operatorname{rank} a \in \operatorname{rank} A$; and if every member of $A$ is grounded, then $A$ is also grounded and $\operatorname{rank} A = \bigcup \{ (\operatorname{rank} a)^+ | a \in A \}$ (``the rank of a set is the least ordinal that is strictly greater than the ranks of all members of the set''). Now, every set is grounded iff every nonempty set $A$ has a member $m$ with $m \cap A = \emptyset$. However, neither side is provable under the current axioms, so we adopt a new one:
+\begin{enumerate}[label=Ax\arabic*.]
+    \setcounter{enumi}{9}
+    \item \textbf{Regularity Axiom}: Every nonempty set $A$ has a member $m$ with $m \cap A = \emptyset$.
+\end{enumerate}
+Basic consequences of regularity include:
+\begin{enumerate}[label=(\alph*)]
+    \item No set is a member of itself.
+    \item There are no sets $a$ and $b$ with $a \in b$ and $b \in a$.
+    \item There is no function $f$ with domain $\omega$ such that
+    \[ \cdots \in f(2) \in f(1) \in f(0). \]
+\end{enumerate}
+With every set grounded, sets are arranged hierarchically according to rank; the universe of all sets is determined by (1) the extent of the class of ordinals, and (2) the variety of subsets assigned to a set by the power set operation.
 
 \end{document}
